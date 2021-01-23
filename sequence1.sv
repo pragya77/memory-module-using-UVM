@@ -2,6 +2,7 @@
  class sequence1 extends uvm_sequence #(packet);
 
 	packet item;
+    int count = 0;
 
    `uvm_object_utils(sequence1)
 
@@ -12,23 +13,24 @@
 	virtual task body();
 		`uvm_info(get_type_name(), "Executing sequence", UVM_LOW)	
                    
-      for (int i=0; i<=5;i++)begin
+      for (int i=0; i<=255;i++)begin
           `uvm_info(get_type_name(), "Executing sequence", UVM_LOW)
         `uvm_do_with(item, {item.rd_wr == 1; item.addr == i;})
+        count++;
 		end
                        
-      for (int i=0; i<=5;i++)begin
+      for (int i=0; i<=255;i++)begin
           `uvm_info(get_type_name(), "Executing sequence", UVM_LOW)
           `uvm_do_with(item, {item.rd_wr ==0; item.wr_data == addr; item.addr == i;})
+        count++;
 		end
                          
-      for (int i=0; i<=5;i++)begin
+      for (int i=0; i<=255;i++)begin
           `uvm_info(get_type_name(), "Executing sequence", UVM_LOW)
           `uvm_do_with(item, {item.reset == 0; item.rd_wr ==1; item.addr == i;})
+        count++;
 		end
-        #20;
-     
-        
+        #20;       
 
 	endtask                   
 
