@@ -5,7 +5,10 @@
 	sequencer i_sequencer;
 	driver i_driver;
 
-	`uvm_component_utils(agent)
+	`uvm_component_utils_begin(agent)
+   `uvm_field_enum(uvm_active_passive_enum, is_active, UVM_ALL_ON);
+   `uvm_component_utils_end
+
    
    function new(string name="agent", uvm_component parent = null);
 		super.new(name,parent);
@@ -13,7 +16,8 @@
 
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
-		i_monitor = monitor::type_id::create("i_monitor",this);
+
+        i_monitor = monitor::type_id::create("i_monitor",this);
       if(get_is_active() == UVM_ACTIVE) begin
 			i_sequencer= sequencer::type_id::create("i_sequencer",this);		
 			i_driver = driver::type_id::create("i_driver",this);
