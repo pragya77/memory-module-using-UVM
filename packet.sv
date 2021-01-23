@@ -20,5 +20,7 @@ class packet extends uvm_sequence_item;
 	function new(string name = "packet");
 		super.new(name);
 	endfunction
+  
+  constraint rw { rd_wr dist {1:=40, 0:=60};}
 	
  endclass
