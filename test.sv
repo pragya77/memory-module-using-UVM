@@ -11,6 +11,8 @@
 	endfunction
 
 	function void build_phase(uvm_phase phase);
+      uvm_config_db #(uvm_bitstream_t) :: set (this, "i_env.i_agent.i_monitor", "enable_coverage", 1);
+      
 		super.build_phase(phase);
 		i_seq = sequence1::type_id::create("i_seq");
 		i_env = env::type_id::create("i_env", this);
@@ -25,11 +27,15 @@
 		    i_seq.start(i_env.i_agent.i_sequencer);
           end
           begin
-            #1000;
+          #20000;
           end
         join_any
 		phase.drop_objection(this);
 
 	endtask
+   
+   virtual function void end_of_elaboration_phase (uvm_phase phase);
+		uvm_top.print_topology;
+	endfunction  
 
  endclass
