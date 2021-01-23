@@ -27,7 +27,7 @@
           @(posedge vif.clk);
           vif.rd_wr1 = item.rd_wr;
           if(item.rd_wr == 0)vif.wr_data1 = item.wr_data;
-		vif.addr1 = item.addr;
+		  vif.addr1 = item.addr;
 		  seq_item_port.item_done();
         end
 	endtask
