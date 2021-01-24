@@ -18,6 +18,15 @@ interface intf(input clk, input reset1);
     inout reset1;
   endclocking  
   
+  
+   property P1;
+    @(posedge clk)
+     !rd_wr1 |-> (wr_data1 == addr1); 
+  endproperty  
+  
+  A1: assert property (P1) else 
+    `uvm_error("A1", "Error in property 1 assertion")
+  
 endinterface
 
 
