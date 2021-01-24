@@ -45,7 +45,7 @@
     end
 
 	initial begin
-		run_test("test");
+      run_test("test");
 	end
 
  endmodule
