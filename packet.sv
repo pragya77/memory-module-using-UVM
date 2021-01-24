@@ -24,3 +24,15 @@ class packet extends uvm_sequence_item;
   constraint rw { rd_wr dist {1:=40, 0:=60};}
 	
  endclass
+
+class derived_packet extends packet;
+
+  `uvm_object_utils(derived_packet)
+
+  function new (string name = "derived_packet");
+    super.new(name);
+  endfunction : new
+
+  constraint rw { rd_wr dist {1:=30, 0:=70};}
+
+endclass
